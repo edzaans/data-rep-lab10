@@ -1,9 +1,15 @@
+// Import React
 import React from "react";
 
+// Create a class
 class Header extends React.Component {
+  // add render() that is used to display content
   render() {
+    // Return value ( html in this case )
     return (
-      <div>
+      // Content has to wrapped in parent element to be displayed
+      // Added class for styling test
+      <div className="demo">
         <h1>This is the header component!!!</h1>
       </div>
     );

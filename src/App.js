@@ -1,19 +1,29 @@
-import logo from "./logo.svg";
 import "./App.css";
+// Import Component from react Library
 import { Component } from "react";
+// Import 3 Components that were created  to be used in App.js
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Content from "./Components/Content";
+// Import Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
+// Import Navbar Component from Bootstrap libary
 import { Navbar, Nav } from "react-bootstrap";
+// Import Router,Switch,Route from ReactDOM to use in navigation
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends Component {
+  // add render() that is used to display content
   render() {
+    // Return value goes here, Components in this case
     return (
-      <div className="App">
-        <Router>
-          <Navbar bg="primary" variant="dark">
+      /* Add ROUTER that will allow for navigating to other Components */
+      <Router>
+        <div className="App">
+          {/* Can add Container for extra styling - add it in IMPORTS */}
+          {/* <Container> */}
+          {/* Create NAVBAR */}
+          <Navbar bg="primary" variant="dark" className="px-2">
             <Navbar.Brand href="#home">Navbar</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
@@ -21,20 +31,20 @@ class App extends Component {
               <Nav.Link href="/create">Create</Nav.Link>
             </Nav>
           </Navbar>
+          {/* </Container> */}
 
           <br />
 
+          {/* Add SWITCH to set path to COMPONENTS */}
           <Switch>
             <Route path="/" component={Content} exact></Route>
             <Route path="/read" component={Footer} exact></Route>
             <Route path="/create" component={Header} exact></Route>
           </Switch>
-
-          {/* <Header></Header> */}
-          {/* <Content></Content> */}
-          {/* <Footer></Footer> */}
-        </Router>
-      </div>
+          {/* End SWITCH */}
+        </div>
+      </Router>
+      /* End ROUTER */
     );
   }
 }

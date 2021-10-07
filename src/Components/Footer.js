@@ -1,9 +1,15 @@
-import React, { Component } from "react";
+// Import React
+import React from "react";
 
-class Footer extends Component {
+// Create a class
+class Footer extends React.Component {
+  // add render() that is used to display content
   render() {
+    // Return value ( html in this case )
     return (
-      <div>
+      // Content has to wrapped in parent element to be displayed
+      // Added class for styling test
+      <div className="demo">
         <h1>This is the footer component!!!</h1>
       </div>
     );
