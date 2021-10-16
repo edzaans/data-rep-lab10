@@ -2,9 +2,9 @@ import "./App.css";
 // Import Component from react Library
 import { Component } from "react";
 // Import 3 Components that were created  to be used in App.js
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
 import Content from "./Components/Content";
+import { Read } from "./Components/Read";
+import { Create } from "./Components/Create";
 // Import Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 // Import Navbar Component from Bootstrap libary
@@ -37,9 +37,10 @@ class App extends Component {
 
           {/* Add SWITCH to set path to COMPONENTS */}
           <Switch>
+            {/* Set PATHS to component */}
             <Route path="/" component={Content} exact></Route>
-            <Route path="/read" component={Footer} exact></Route>
-            <Route path="/create" component={Header} exact></Route>
+            <Route path="/read" component={Read} exact></Route>
+            <Route path="/create" component={Create} exact></Route>
           </Switch>
           {/* End SWITCH */}
         </div>
