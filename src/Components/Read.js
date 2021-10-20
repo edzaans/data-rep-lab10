@@ -1,37 +1,30 @@
 import React from "react";
 import { Movies } from "./Movies";
+import axios from "axios";
 
 export class Read extends React.Component {
   // State OBJECT that contains information
   state = {
     // Array of objects
-    movies: [
-      {
-        Title: "Avengers: Infinity War",
-        Year: "2018",
-        imdbID: "tt4154756",
-        Type: "movie",
-        Poster:
-          "https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SX300.jpg",
-      },
-      {
-        Title: "Captain America: Civil War",
-        Year: "2016",
-        imdbID: "tt3498820",
-        Type: "movie",
-        Poster:
-          "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg",
-      },
-      {
-        Title: "Charlie Wilson's War",
-        Year: "2007",
-        imdbID: "tt0472062",
-        Type: "movie",
-        Poster:
-          "https://m.media-amazon.com/images/M/MV5BMTgwMDgwMDc4MF5BMl5BanBnXkFtZTYwOTU3MDM4._V1_SX300.jpg",
-      },
-    ],
+    movies: [],
+    test: "",
   };
+
+  componentDidMount() {
+    axios
+      .get("https://jsonblob.com/api/jsonblob/894944504570986496")
+      .then((res) => {
+        this.setState({ movies: res.data.movies });
+      })
+      // Use it to test if state got updated
+      .then(() => {
+        this.setState({ test: "Data came back OK!!!" });
+        console.log(this.state.test);
+      })
+      .catch((err) => {
+        console.log("Oh ohh, error in request", err);
+      });
+  }
 
   // Render method
   render() {
