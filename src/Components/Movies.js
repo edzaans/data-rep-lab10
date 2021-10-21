@@ -6,9 +6,11 @@ export class Movies extends React.Component {
   // Render method
   render() {
     // Return props and loop over each item with .map() function
-    return this.props.movies.map((element) => {
+    return this.props.movies.map((element, index) => {
       // Create element for every item in .map()
-      return <MovieItem movie={element}></MovieItem>;
+      // Add key to every element returned and add key prop(index)
+      // Index is used as a counter
+      return <MovieItem movie={element} key={index}></MovieItem>;
     });
   }
 }
