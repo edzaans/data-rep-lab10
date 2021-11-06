@@ -2,6 +2,8 @@
 import React from "react";
 // Import Components to be used from BootStrap library
 import { Form, Button, Container } from "react-bootstrap";
+// Import axios to communicate with Back End
+import axios from "axios";
 
 // Create CREATE Class and export it
 export class Create extends React.Component {
@@ -35,6 +37,34 @@ export class Create extends React.Component {
     alert(
       `Movie added : ${this.state.Title} - ${this.state.Year} - ${this.state.Poster}`
     );
+    // Declare Object that is sent with Axios.post method
+    const newmovie = {
+      title: this.state.Title,
+      year: this.state.Year,
+      poster: this.state.Poster,
+    };
+
+    // Create POST to server
+    axios
+      .post("http://localhost:4000/api/movies", newmovie)
+      // Promise is returned here
+      .then((response) => {
+        console.log(response);
+      })
+      // Catch block
+      .catch((err) => {
+        console.log("Error in posting data : " + err);
+      });
+
+    /*  
+    ******   FOR TESTING DATA STREAM ONLY ********
+    const test = "Data stream works";
+    axios
+      .post("http://localhost:4000/api/movies", test)
+      .then(console.log(test));
+      
+    ***********************************************
+    */
   }
 
   // Function to be run when Title value submitted

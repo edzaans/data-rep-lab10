@@ -16,9 +16,7 @@ export class Read extends React.Component {
   // Use componentDidMount() as a constructor for Async
   componentDidMount() {
     axios
-      // URL with data
-      // Returns a Promise with response/reject
-      .get("https://jsonblob.com/api/jsonblob/894944504570986496")
+      .get("http://localhost:4000/api/movies")
       // If Promise resolved run this...
       .then((res) => {
         // Update state with resolved promise data
