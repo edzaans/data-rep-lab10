@@ -20,7 +20,9 @@ export class Read extends React.Component {
       // If Promise resolved run this...
       .then((res) => {
         // Update state with resolved promise data
-        this.setState({ movies: res.data.movies });
+        this.setState({ movies: res.data });
+        // Test if data came back from API
+        console.log(res.data);
       })
       // Use it to TEST if state got updated
       .then(() => {
