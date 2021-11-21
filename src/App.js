@@ -5,6 +5,7 @@ import { Component } from "react";
 import Content from "./Components/Content";
 import { Read } from "./Components/Read";
 import { Create } from "./Components/Create";
+import { Edit } from "./Components/Edit";
 // Import Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 // Import Navbar Component from Bootstrap libary
@@ -41,6 +42,7 @@ class App extends Component {
             <Route path="/" component={Content} exact></Route>
             <Route path="/read" component={Read} exact></Route>
             <Route path="/create" component={Create} exact></Route>
+            <Route path="/edit/:id" component={Edit} exact />
           </Switch>
           {/* End SWITCH */}
         </div>

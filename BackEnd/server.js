@@ -100,6 +100,22 @@ app.get("/api/movies/:id", (req, res) => {
   });
 });
 
+// Edit a Record
+app.put("/api/movies/:id", (req, res) => {
+  console.log("Update movie : " + req.params.id);
+  console.log(req.body);
+
+  // Check DB and update based on movie ID
+  MovieModel.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, data) => {
+      res.send(data);
+    }
+  );
+});
+
 //Listen to POST request
 app.post("/api/movies", (req, res) => {
   // Log data passed to server
