@@ -10,7 +10,8 @@ export class Movies extends React.Component {
       // Create element for every item in .map()
       // Add key to every element returned and add key prop(index)
       // Index is used as a counter
-      return <MovieItem movie={element} key={index}></MovieItem>;
+      // Pass data downstream, with props
+      return <MovieItem movie={element} reloadData={this.props.reloadData} key={index}></MovieItem>;
     });
   }
 }

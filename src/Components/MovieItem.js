@@ -1,10 +1,34 @@
 import React from "react";
 // Import Card component from BootStrap
-import { Card } from "react-bootstrap";
+import { Card,Button } from "react-bootstrap";
 // Import React link
 import { Link } from "react-router-dom";
 
+// Import Axios
+import Axios from "axios";
+
 export class MovieItem extends React.Component {
+
+  constructor() {
+    super();
+    // Bind method to THIS
+    this.deleteMovie = this.deleteMovie.bind(this);
+  }
+
+// Create a delete method and add to onClick 
+deleteMovie() {
+ console.log("Deleted: "+this.props.movie._id);
+
+Axios.delete("http://localhost:4000/api/movies/"+this.props.movie._id)
+.then(()=>{
+  // Pass props to realod data using PROPS
+  this.props.reloadData();
+})
+.catch()
+
+};
+  
+  
   // Render method
   render() {
     // Return Card component
@@ -26,6 +50,7 @@ export class MovieItem extends React.Component {
           >
             Edit
           </Link>
+        <Button className="btn btn-danger" onClick={this.deleteMovie}>Delete</Button>
         </Card>
       </div>
     );
