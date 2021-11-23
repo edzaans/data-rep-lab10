@@ -116,6 +116,22 @@ app.put("/api/movies/:id", (req, res) => {
   );
 });
 
+// Delete a record
+app.delete("/api/movies/:id",(req,res)=>{
+  console.log("Deleting:"+req.params.id);
+
+  // Set DB query with data what top delete
+MovieModel.deleteOne({_id: req.params.id},(err,data)=>{
+  if(err){
+    res.send(err);
+    
+  }
+  res.send(data);
+})
+
+})
+
+
 //Listen to POST request
 app.post("/api/movies", (req, res) => {
   // Log data passed to server
