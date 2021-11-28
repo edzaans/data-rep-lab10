@@ -1,6 +1,6 @@
 import React from "react";
 // Import Card component from BootStrap
-import { Card,Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 // Import React link
 import { Link } from "react-router-dom";
 
@@ -8,27 +8,28 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 
 export class MovieItem extends React.Component {
-
   constructor() {
     super();
     // Bind method to THIS
     this.deleteMovie = this.deleteMovie.bind(this);
   }
 
-// Create a delete method and add to onClick 
-deleteMovie() {
- console.log("Deleted: "+this.props.movie._id);
+  // Create a delete method and add to onClick
+  deleteMovie() {
+    console.log("Deleted: " + this.props.movie._id);
 
-Axios.delete("http://localhost:4000/api/movies/"+this.props.movie._id)
-.then(()=>{
-  // Pass props to realod data using PROPS
-  this.props.reloadData();
-})
-.catch()
+    // Create a DELETE call with Axios that takes in current item ID
+    Axios.delete("http://localhost:4000/api/movies/" + this.props.movie._id)
+      .then(() => {
+        // Pass props to realod data using PROPS
+        this.props.reloadData();
+      })
+      // Catch any errors and display for debug
+      .catch((err) => {
+        throw err;
+      });
+  }
 
-};
-  
-  
   // Render method
   render() {
     // Return Card component
@@ -50,7 +51,9 @@ Axios.delete("http://localhost:4000/api/movies/"+this.props.movie._id)
           >
             Edit
           </Link>
-        <Button className="btn btn-danger" onClick={this.deleteMovie}>Delete</Button>
+          <Button className="btn btn-danger" onClick={this.deleteMovie}>
+            Delete
+          </Button>
         </Card>
       </div>
     );

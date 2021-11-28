@@ -6,26 +6,26 @@ import { Movies } from "./Movies";
 import axios from "axios";
 
 export class Read extends React.Component {
-
-  // CXlass Constructor 
+  // Class Constructor , add reload data
   constructor() {
     super();
     this.reloadData = this.reloadData.bind(this);
   }
 
   reloadData() {
-    axios.get("http://localhost:4000/api/movies")
-    .then((res) => {
-      this.setState({ movies: res.data });
-      console.log(res.data);
-    })
-    .then(() => {
-      this.setState({ test: "Data came back OK!!!" });
-      console.log(this.state.test);
-    })
-    .catch((err) => {
-      console.log("Oh ohh, error in request", err);
-    });
+    axios
+      .get("http://localhost:4000/api/movies")
+      .then((res) => {
+        this.setState({ movies: res.data });
+        console.log(res.data);
+      })
+      .then(() => {
+        this.setState({ test: "Data came back OK!!!" });
+        console.log(this.state.test);
+      })
+      .catch((err) => {
+        console.log("Oh ohh, error in request", err);
+      });
   }
 
   // State OBJECT that contains information
@@ -63,8 +63,11 @@ export class Read extends React.Component {
     // Return method to return what has to be rendered
     return (
       <div>
-        {/* Pass data downstream to MOVIES */} Pass data downstream 
-        <Movies movies={this.state.movies} reloadData={this.reloadData}></Movies>
+        {/* Pass data downstream to MOVIES */}
+        <Movies
+          movies={this.state.movies}
+          reloadData={this.reloadData}
+        ></Movies>
       </div>
     );
   }
