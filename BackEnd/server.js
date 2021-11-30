@@ -9,7 +9,12 @@ const port = 4000;
 // Include Mongoose
 const mongoose = require("mongoose");
 
-// Add CORS
+// Serve the static files from the React app
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../build')));
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
+
+/* // Add CORS
 const cors = require("cors");
 // Set app to use CORS
 app.use(cors());
@@ -22,7 +27,7 @@ app.use(function (req, res, next) {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
-});
+}); */
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,6 +49,9 @@ const movieSchema = new Schema({
   year: String,
   poster: String,
 });
+
+
+  
 
 // Define new model in DB
 const MovieModel = mongoose.model("movie", movieSchema);
@@ -149,6 +157,11 @@ app.post("/api/movies", (req, res) => {
   // Prevents duplication of entries to DB
   res.send("Item Added");
 });
+
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/../build/index.html'));
+  });
 
 // Set listen method for Debugging in console
 app.listen(port, () => {
