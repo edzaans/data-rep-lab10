@@ -10,11 +10,11 @@ const port = 4000;
 const mongoose = require("mongoose");
 
 // Serve the static files from the React app
-const path = require('path');
-app.use(express.static(path.join(__dirname, '../build')));
-app.use('/static', express.static(path.join(__dirname, 'build//static')));
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../build")));
+app.use("/static", express.static(path.join(__dirname, "build//static")));
 
-/* // Add CORS
+// Add CORS
 const cors = require("cors");
 // Set app to use CORS
 app.use(cors());
@@ -27,8 +27,11 @@ app.use(function (req, res, next) {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
-}); */
+});
 
+// Point EXPRESS to build folder
+/* app.use(express.static(path.join(__dirname, "../build")));
+app.use("/static", express.static(path.join(__dirname, "build//static"))); */
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -49,9 +52,6 @@ const movieSchema = new Schema({
   year: String,
   poster: String,
 });
-
-
-  
 
 // Define new model in DB
 const MovieModel = mongoose.model("movie", movieSchema);
@@ -108,6 +108,11 @@ app.get("/api/movies/:id", (req, res) => {
   });
 });
 
+// Handles any requests that don't match the ones above
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/../build/index.html"));
+});
+
 // Edit a Record
 app.put("/api/movies/:id", (req, res) => {
   console.log("Update movie : " + req.params.id);
@@ -125,20 +130,17 @@ app.put("/api/movies/:id", (req, res) => {
 });
 
 // Delete a record
-app.delete("/api/movies/:id",(req,res)=>{
-  console.log("Deleting:"+req.params.id);
+app.delete("/api/movies/:id", (req, res) => {
+  console.log("Deleting:" + req.params.id);
 
   // Set DB query with data what top delete
-MovieModel.deleteOne({_id: req.params.id},(err,data)=>{
-  if(err){
-    res.send(err);
-    
-  }
-  res.send(data);
-})
-
-})
-
+  MovieModel.deleteOne({ _id: req.params.id }, (err, data) => {
+    if (err) {
+      res.send(err);
+    }
+    res.send(data);
+  });
+});
 
 //Listen to POST request
 app.post("/api/movies", (req, res) => {
@@ -157,11 +159,6 @@ app.post("/api/movies", (req, res) => {
   // Prevents duplication of entries to DB
   res.send("Item Added");
 });
-
-// Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname+'/../build/index.html'));
-  });
 
 // Set listen method for Debugging in console
 app.listen(port, () => {
